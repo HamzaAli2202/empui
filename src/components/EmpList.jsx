@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Grid, Card, CardContent } from "@mui/material";
 import axios from "axios";
 import { EmpItem } from "./EmpItem";
-export const EmpList = () => {
+
+export const EmpList = ({ item, handleUpdate }) => {
   const [data, setData] = useState([]);
 
   const getApi = async () => {
     const result = await axios.get("http://localhost:1021/allemp");
     setData(result.data);
   };
+
   useEffect(() => {
     getApi();
   }, []);
@@ -43,7 +45,7 @@ export const EmpList = () => {
               <Grid item xs={12}>
                 <Card>
                   <CardContent>
-                    <EmpItem item={item} />
+                    <EmpItem handleUpdate={handleUpdate} item={item} />
                   </CardContent>
                 </Card>
               </Grid>

@@ -2,15 +2,14 @@ import React from "react";
 import { AddEmp } from "./components/AddEmp";
 import { EmpList } from "./components/EmpList";
 import { Card, CardContent } from "@mui/material";
+import { Landing } from "./components/Landing";
 
 function App() {
   return (
     <Card sx={{ bgcolor: "gray" }}>
       <CardContent>
-        <AddEmp />
-        <br />
-        <br />
-        <EmpList />
+        {/* <AddEmp /> */}
+        <Landing />
       </CardContent>
     </Card>
   );
