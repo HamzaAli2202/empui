@@ -6,23 +6,74 @@ import {
   CardContent,
   Button,
   TextField,
+  Alert,
 } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { EmpList } from "./EmpList";
+import Select from "react-select";
 
 export const AddEmp = () => {
+  // const navigate = useNavigate();
+
   const [empid, setEmpid] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState(0);
   const [city, setCity] = useState("");
-  const [isActive, setIsActive] = useState(false);
+  const [IsActive, setIsActive] = useState(false);
   const [update, setUpdate] = useState(false);
   const [_id, set_id] = useState();
   const [valid, setValid] = useState(false);
+  const [show, setShow] = useState("");
   // console.log("isactive", isActive);
-
+  const option = [
+    {
+      label: "Mumbai",
+      value: "Mumbai",
+    },
+    {
+      label: "Pune",
+      value: "Pune",
+    },
+    {
+      label: "Nanded",
+      value: "Nanded",
+    },
+    {
+      label: "Nagpur",
+      value: "Nagpur",
+    },
+    {
+      label: "Hyderabad",
+      value: "Hyderabad",
+    },
+    {
+      label: "Delhi",
+      value: "Delhi",
+    },
+    {
+      label: "Banglore",
+      value: "Banglore",
+    },
+    {
+      label: "Chennai",
+      value: "Chennai",
+    },
+    {
+      label: "Kolkata",
+      value: "Kolkata",
+    },
+    {
+      label: "Aurangabad",
+      value: "Aurangabad",
+    },
+    {
+      label: "Solapur",
+      value: "Solapur",
+    },
+  ];
   const handleSubmit = async () => {
     if (update === true) {
       const url = "http://localhost:1021/empupd";
@@ -34,10 +85,13 @@ export const AddEmp = () => {
         email,
         mobile,
         city,
-        isActive,
+        IsActive,
       };
       const result = await axios.post(url, payload);
+      setShow(result.data);
       // console.log(result, "result==========");
+      result.status === 200 && setUpdate(false);
+
       setEmpid("");
       setFname("");
       setLname("");
@@ -45,11 +99,18 @@ export const AddEmp = () => {
       setMobile();
       setCity("");
       setIsActive(false);
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 3000);
+      // navigate("/");
+      // const result2 = await axios.post(url, payload);
     } else {
       const url = "http://localhost:1021/addemp";
-      const payload = { empid, fname, lname, email, mobile, city, isActive };
+      const payload = { empid, fname, lname, email, mobile, city, IsActive };
       const result = await axios.post(url, payload);
+      setShow(result.data);
       // console.log(result, "result==========");
+      result.status === 200 && setEmpid("");
       setEmpid("");
       setFname("");
       setLname("");
@@ -57,6 +118,11 @@ export const AddEmp = () => {
       setMobile();
       setCity("");
       setIsActive(false);
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 3000);
+      // navigate("/");
+      // const result3 = await axios.post(url, payload);
     }
   };
 
@@ -76,7 +142,7 @@ export const AddEmp = () => {
     setEmail(item.email);
     setMobile(item.mobile);
     setCity(item.city);
-    setIsActive(item.isActive);
+    setIsActive(item.IsActive);
     set_id(item._id);
     setUpdate(true);
   };
@@ -84,7 +150,7 @@ export const AddEmp = () => {
     setValid(
       fname !== "" &&
         lname !== "" &&
-        city !== "" &&
+        // city !== "" &&
         email !== "" &&
         empid.length <= 5 &&
         mobile.length <= 10
@@ -149,24 +215,25 @@ export const AddEmp = () => {
               />
             </Grid>
             <Grid item xs={3}>
-              <TextField
+              {/* <TextField
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 required
                 variant="outlined"
                 label="City"
                 fullWidth
-              />
+              /> */}
+              <Select onChange={(e) => setCity(e.value)} options={option} />
             </Grid>
             <Grid item xs={1}>
               <Switch
-                isActive={isActive}
-                onClick={() => setIsActive(!isActive)}
+                isActive={IsActive}
+                onClick={() => setIsActive(!IsActive)}
               />
             </Grid>
             <Grid item xs={3}>
               <Button
-                disabled={!valid}
+                disabled={update ? "" : !valid}
                 onClick={handleSubmit}
                 sx={{ height: 55 }}
                 variant="contained"
@@ -189,8 +256,9 @@ export const AddEmp = () => {
         </CardContent>
       </Card>
       <br />
+      {show && <Alert severity="success">{show}</Alert>}
       <br />
-      <EmpList handleUpdate={handleUpdate} />
+      <EmpList setShow={setShow} handleUpdate={handleUpdate} />
     </div>
   );
 };

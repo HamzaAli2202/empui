@@ -31,6 +31,18 @@ export const EmpDetails = () => {
                   voluptatum. Aut.
                 </p>
               </Grid>
+              <Grid align="center" item xs={3}>
+                <div
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "50%",
+                    backgroundColor: data.IsActive ? "green" : "red",
+                  }}
+                ></div>
+                {data.IsActive ? "Active" : "De-Active"}
+                <h1>{data.empid}</h1>
+              </Grid>
             </Grid>
           </CardContent>
         </Card>

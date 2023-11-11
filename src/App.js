@@ -3,10 +3,11 @@ import { AddEmp } from "./components/AddEmp";
 import { EmpList } from "./components/EmpList";
 import { Card, CardContent } from "@mui/material";
 import { Landing } from "./components/Landing";
+import "./common.css";
 
 function App() {
   return (
-    <Card sx={{ bgcolor: "gray" }}>
+    <Card>
       <CardContent>
         {/* <AddEmp /> */}
         <Landing />

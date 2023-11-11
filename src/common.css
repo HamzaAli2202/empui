@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content-login {
+    background-image: url('https://chat.google.com/room/AAAAqhenrrM/yJdMGlmA6Z8/yJdMGlmA6Z8?cls=10');
+    background-size: cover;
+    background-repeat: no-repeat;
+}

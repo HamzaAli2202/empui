@@ -3,7 +3,7 @@ import { Grid, Button } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const EmpItem = ({ item, handleUpdate }) => {
+export const EmpItem = ({ item, handleUpdate, setShow }) => {
   const navigate = useNavigate();
 
   const handleDetails = (item) => {
@@ -15,7 +15,8 @@ export const EmpItem = ({ item, handleUpdate }) => {
     const payload = { _id };
     if (window.confirm("Are You Sure to Delete")) {
       const result = await axios.post(url, payload);
-      console.log(result, "delete=======");
+      setShow(result.data);
+      // console.log(result, "delete=======");
     }
   };
 
@@ -30,8 +31,8 @@ export const EmpItem = ({ item, handleUpdate }) => {
         sx={{ cursor: "pointer" }}
         onClick={() => handleDetails(item)}
       >
-        {item.fname.toUpperCase()}
-        {item.lname.toUpperCase()}
+        {`${item.fname.toUpperCase()} 
+        ${item.lname.toUpperCase()}`}
       </Grid>
       <Grid item xs={2}>
         {item.email}
@@ -48,7 +49,7 @@ export const EmpItem = ({ item, handleUpdate }) => {
             width: "20px",
             height: "20px",
             borderRadius: "50%",
-            backgroundColor: item.isActive === true ? "green" : "red",
+            backgroundColor: item.IsActive === true ? "green" : "red",
           }}
         ></div>
       </Grid>
