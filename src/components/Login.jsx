@@ -13,6 +13,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [errors, setErrors] = useState();
 
   const handleLogin = () => {
     localStorage.setItem("email", email);
@@ -25,9 +26,12 @@ export const Login = () => {
       navigate("/");
     } else {
       navigate("/login");
-      console.log("Invalid Email or Password");
+      setErrors("Invalid Email or Password");
     }
   };
+  setTimeout(() => {
+    setErrors("");
+  }, 3000);
   return (
     <div className="content-login">
       <Card>
@@ -69,6 +73,9 @@ export const Login = () => {
                       >
                         login
                       </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <span style={{ color: "red" }}>{errors}</span>
                     </Grid>
                   </Grid>
                 </CardContent>

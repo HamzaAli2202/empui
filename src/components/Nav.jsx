@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Nav = () => {
-  const navdata = ["home", "logout", "login"];
+  const navdata = ["home", "logout"];
   return (
     <Card>
       <CardContent>

@@ -14,7 +14,7 @@ import { EmpList } from "./EmpList";
 import Select from "react-select";
 
 export const AddEmp = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [empid, setEmpid] = useState("");
   const [fname, setFname] = useState("");
@@ -157,6 +157,11 @@ export const AddEmp = () => {
     );
   }, [empid, fname, lname, mobile, city, email]);
 
+  useEffect(() => {
+    const emails = localStorage.getItem("email");
+
+    emails || (!emails && navigate("/login"));
+  }, []);
   return (
     <div>
       <Card>
