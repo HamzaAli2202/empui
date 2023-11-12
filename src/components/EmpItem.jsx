@@ -17,6 +17,7 @@ export const EmpItem = ({ item, handleUpdate, setShow }) => {
       const result = await axios.post(url, payload);
       setShow(result.data);
       // console.log(result, "delete=======");
+      window.location.reload(false);
     }
   };
 

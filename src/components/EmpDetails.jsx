@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 export const EmpDetails = () => {
   const mydata = useLocation();
   const data = mydata.state;
-  //   console.log("data===========", data);
+  // console.log("data===========", data);
 
   return (
     <Grid container spacing={2}>
